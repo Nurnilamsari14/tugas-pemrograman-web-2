@@ -12,3 +12,21 @@ Route::get('/books', function () {
 
     return view('books.index', compact('books'));
 });
+
+Route::get('/books/create', function () {
+    return view('books.create');
+});
+
+Route::post('/books', function (\Illuminate\Http\Request $request) {
+    $validated = $request->validate([
+        'judul_buku' => 'required|string|max:255',
+        'penulis' => 'required|string|max:255',
+        'penerbit' => 'required|string|max:255',
+        'tahun_terbit' => 'required|integer|min:1900|max:2100',
+        'stok' => 'required|integer|min:0',
+    ]);
+
+    Book::create($validated);
+
+    return redirect('/books');
+});
