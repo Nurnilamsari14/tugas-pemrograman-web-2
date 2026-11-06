@@ -63,7 +63,7 @@
             Simpan Buku
         </button>
 
-        <a href="/books"
+        <a href="/"
             style="margin-left: 10px; text-decoration: none;">
             Kembali
         </a>

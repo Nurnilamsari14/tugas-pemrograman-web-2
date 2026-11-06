@@ -1,17 +1,15 @@
-
 <?php
 
 use Illuminate\Support\Facades\Route;
 use App\Models\Book;
 
 Route::get('/', function () {
-    return view('home');
+    $books = Book::all();
+    return view('home', compact('books'));
 });
 
 Route::get('/books', function () {
-    $books = Book::all();
-
-    return view('books.index', compact('books'));
+    return redirect('/');
 });
 
 Route::get('/books/create', function () {
@@ -29,7 +27,7 @@ Route::post('/books', function (\Illuminate\Http\Request $request) {
 
     Book::create($validated);
 
-    return redirect('/books');
+    return redirect('/')->with('success', 'Buku berhasil ditambahkan');
 });
 
 Route::get('/books/{book}/edit', function (Book $book) {
@@ -47,5 +45,11 @@ Route::put('/books/{book}', function (\Illuminate\Http\Request $request, Book $b
 
     $book->update($validated);
 
-    return redirect('/books');
+    return redirect('/')->with('success', 'Buku berhasil diubah');
+});
+
+Route::delete('/books/{book}', function (Book $book) {
+    $book->delete();
+
+    return redirect('/')->with('success', 'Buku berhasil dihapus');
 });
