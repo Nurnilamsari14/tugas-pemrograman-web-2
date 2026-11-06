@@ -1,4 +1,3 @@
-
 <?php
 
 use Illuminate\Support\Facades\Route;
@@ -46,6 +45,12 @@ Route::put('/books/{book}', function (\Illuminate\Http\Request $request, Book $b
     ]);
 
     $book->update($validated);
+
+    return redirect('/books');
+});
+
+Route::delete('/books/{book}', function (Book $book) {
+    $book->delete();
 
     return redirect('/books');
 });

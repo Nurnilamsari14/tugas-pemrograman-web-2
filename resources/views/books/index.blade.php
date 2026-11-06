@@ -22,28 +22,51 @@
                     <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">
                         {{ $loop->iteration }}
                     </td>
+
                     <td style="padding: 10px; border: 1px solid #ddd;">
                         {{ $book->judul_buku }}
                     </td>
+
                     <td style="padding: 10px; border: 1px solid #ddd;">
                         {{ $book->penulis }}
                     </td>
+
                     <td style="padding: 10px; border: 1px solid #ddd;">
                         {{ $book->penerbit }}
                     </td>
+
                     <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">
                         {{ $book->tahun_terbit }}
                     </td>
+
                     <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">
                         {{ $book->stok }}
                     </td>
+
                     <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">
+
                         <a href="/books/{{ $book->id }}/edit"
-                            style="background: #f59e0b; color: white; padding: 6px 12px; text-decoration: none; border-radius: 4px;">
+                            style="background: #f59e0b; color: white; padding: 6px 12px; text-decoration: none; border-radius: 4px; display: inline-block; margin-bottom: 10px;">
                             Edit
                         </a>
+
+                        <form action="/books/{{ $book->id }}" method="POST"
+                            style="display: block; margin-top: 10px;">
+
+                            @csrf
+                            @method('DELETE')
+
+                            <button type="submit"
+                                onclick="return confirm('Apakah kamu yakin ingin menghapus buku ini?')"
+                                style="background: #dc2626; color: white; padding: 6px 12px; border: none; border-radius: 4px; cursor: pointer;">
+                                Hapus
+                            </button>
+
+                        </form>
+
                     </td>
                 </tr>
+
             @empty
                 <tr>
                     <td colspan="7" style="padding: 15px; text-align: center;">
