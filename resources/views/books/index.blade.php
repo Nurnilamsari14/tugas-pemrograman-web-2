@@ -12,6 +12,7 @@
                 <th style="padding: 12px; border: 1px solid #ddd;">Penerbit</th>
                 <th style="padding: 12px; border: 1px solid #ddd;">Tahun Terbit</th>
                 <th style="padding: 12px; border: 1px solid #ddd;">Stok</th>
+                <th style="padding: 12px; border: 1px solid #ddd;">Aksi</th>
             </tr>
         </thead>
 
@@ -36,10 +37,16 @@
                     <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">
                         {{ $book->stok }}
                     </td>
+                    <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">
+                        <a href="/books/{{ $book->id }}/edit"
+                            style="background: #f59e0b; color: white; padding: 6px 12px; text-decoration: none; border-radius: 4px;">
+                            Edit
+                        </a>
+                    </td>
                 </tr>
             @empty
                 <tr>
-                    <td colspan="6" style="padding: 15px; text-align: center;">
+                    <td colspan="7" style="padding: 15px; text-align: center;">
                         Belum ada data buku.
                     </td>
                 </tr>

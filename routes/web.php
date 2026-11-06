@@ -1,3 +1,4 @@
+
 <?php
 
 use Illuminate\Support\Facades\Route;
@@ -27,6 +28,24 @@ Route::post('/books', function (\Illuminate\Http\Request $request) {
     ]);
 
     Book::create($validated);
+
+    return redirect('/books');
+});
+
+Route::get('/books/{book}/edit', function (Book $book) {
+    return view('books.edit', compact('book'));
+});
+
+Route::put('/books/{book}', function (\Illuminate\Http\Request $request, Book $book) {
+    $validated = $request->validate([
+        'judul_buku' => 'required|string|max:255',
+        'penulis' => 'required|string|max:255',
+        'penerbit' => 'required|string|max:255',
+        'tahun_terbit' => 'required|integer|min:1900|max:2100',
+        'stok' => 'required|integer|min:0',
+    ]);
+
+    $book->update($validated);
 
     return redirect('/books');
 });
